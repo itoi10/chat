@@ -1,26 +1,59 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import  defaultDataset from './data/dataset'
+import './assets/styles/style.css'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+interface Props {
+}
+
+interface Chats {
+  // チャット本文
+  text: string
+  // 質問or回答
+  type: string
+}
+
+interface Answer {
+  // 回答内容
+  content: string
+  // 次の質問のID
+  nextId: string
+}
+
+interface State {
+  // 回答コンポーネントに表示するデータ
+  answers: Array<string>
+  // チャットコンポーネントに表示するデータ
+  chats: Array<string>
+  // 現在の質問ID
+  currentId: string,
+  // 質問と回答のデータセット
+  dataset: typeof defaultDataset,
+  // 問い合わせフォーム用モーダルの開閉
+  open: boolean
+}
+
+class App extends React.Component<Props, State> {
+  constructor(props:Props) {
+    super(props);
+
+    this.state = {
+      answers: [],
+      chats: [],
+      currentId: "init",
+      dataset: defaultDataset,
+      open: false,
+    }
+  }
+
+  render(): React.ReactNode {
+    return (
+      <section className="c-section">
+        <div className="c-box">
+          Hello Chatbot!
+        </div>
+      </section>
+    );
+  }
 }
 
 export default App;
