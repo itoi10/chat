@@ -1,0 +1,13 @@
+rules_version = '2';
+service cloud.firestore {
+  // 基本的なセキュリティ ルール
+  // https://firebase.google.com/docs/rules/basics?hl=ja
+  match /databases/{database}/documents {
+    match /{document=**} {
+      // 読み取りは誰でも可能
+      allow read;
+      // 書き込みは認証されたユーザのみ可能
+      allow write: if request.auth != null;
+    }
+  }
+}
