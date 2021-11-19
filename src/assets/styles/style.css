@@ -24,3 +24,11 @@
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+/* アンサーの外枠 */
+.c-grid__answer {
+  display: flex;
+  flex-flow: column;
+  justify-content: flex-end;
+  height: 192px;
+}

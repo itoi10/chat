@@ -1,33 +1,43 @@
 import React from 'react';
 import  defaultDataset from './data/dataset'
 import './assets/styles/style.css'
+import { AnswersList } from './components/index'
 
-interface Props {
-}
 
-interface Chats {
+
+export interface Chats {
   // チャット本文
   text: string
   // 質問or回答
   type: string
 }
 
-interface Answer {
+export interface Answers {
   // 回答内容
   content: string
   // 次の質問のID
   nextId: string
 }
 
+export interface Dataset {
+  id:       string;
+  answers:  Array<Answers>;
+  question: string;
+}
+
+
+interface Props {
+}
+
 interface State {
   // 回答コンポーネントに表示するデータ
-  answers: Array<string>
+  answers: Array<Answers>
   // チャットコンポーネントに表示するデータ
   chats: Array<string>
   // 現在の質問ID
   currentId: string,
   // 質問と回答のデータセット
-  dataset: typeof defaultDataset,
+  dataset: Array<Dataset>,
   // 問い合わせフォーム用モーダルの開閉
   open: boolean
 }
@@ -45,11 +55,12 @@ class App extends React.Component<Props, State> {
     }
   }
 
+
   render(): React.ReactNode {
     return (
       <section className="c-section">
         <div className="c-box">
-          Hello Chatbot!
+          <AnswersList/>
         </div>
       </section>
     );
