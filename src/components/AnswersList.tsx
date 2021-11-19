@@ -3,17 +3,16 @@ import { Answer } from './index'
 import { Answers } from '../App'
 
 interface Props {
-
+  answers: Answers[]
 }
 
-const AnswersList:React.FC<Props> = () => {
+const AnswersList:React.FC<Props> = ({answers}) => {
 
   return (
     <div className='c-grid__answer'>
-      <Answer content={'富士山'} />
-      <Answer content={'北岳'}/>
-      <Answer content={'日和山'}/>
-      <Answer content={'天保山'}/>
+      {answers.map((value, index) => (
+        <Answer content={value.content} key={index}/>
+      ))}
     </div>
   )
 }

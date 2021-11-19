@@ -21,7 +21,7 @@ export interface Answers {
 
 export interface Dataset {
   id:       string;
-  answers:  Array<Answers>;
+  answers:  Answers[];
   question: string;
 }
 
@@ -55,12 +55,24 @@ class App extends React.Component<Props, State> {
     }
   }
 
+  initAnswer = () => {
+    const initDataset = this.state.dataset[0]
+    const initAnswers = initDataset.answers
+    this.setState({
+      answers: initAnswers
+    })
+  }
+
+  // 初期化後の処理
+  componentDidMount() {
+    this.initAnswer()
+  }
 
   render(): React.ReactNode {
     return (
       <section className="c-section">
         <div className="c-box">
-          <AnswersList/>
+          <AnswersList answers={this.state.answers}/>
         </div>
       </section>
     );
