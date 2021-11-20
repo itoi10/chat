@@ -99,6 +99,15 @@ class App extends React.Component<Props, State> {
     this.selectAnswer({ content: initAnswer, nextId: this.state.currentId });
   }
 
+  // コンポーネント更新直後の処理
+  componentDidUpdate(prevProps: Props, prevState: State) {
+    // 一番下にスクロール, #scroll-areaはChatsの属性
+    const scrollArea = document.getElementById("scroll-area");
+    if (scrollArea) {
+      scrollArea.scrollTop = scrollArea.scrollHeight;
+    }
+  }
+
   render(): React.ReactNode {
     return (
       <section className="c-section">

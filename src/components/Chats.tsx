@@ -23,7 +23,7 @@ const Chats: React.FC<Props> = ({ chats }) => {
   const classes = useStyles();
 
   return (
-    <List className={classes.chats}>
+    <List className={classes.chats} id={"scroll-area"}>
       {chats.map((chat, index) => (
         <Chat chat={chat} key={index.toString()} />
       ))}
