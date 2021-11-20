@@ -5,6 +5,7 @@ import { AnswersContent } from "../App";
 
 interface Props {
   answer: AnswersContent;
+  disabled: boolean;
   select: (answer: AnswersContent) => void;
 }
 
@@ -24,11 +25,15 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const Answer: React.FC<Props> = ({ answer, select }) => {
+const Answer: React.FC<Props> = ({ answer, disabled, select }) => {
   const classes = useStyles();
 
   return (
-    <Button className={classes.button} variant="outlined" onClick={() => select(answer)}>
+    <Button
+      className={classes.button} variant="outlined"
+      disabled={disabled}
+      onClick={() => select(answer)}
+    >
       {answer.content}
     </Button>
   );

@@ -35,6 +35,8 @@ interface State {
   dataset: { [key: string]: Dataset };
   // 問い合わせフォーム用モーダルの開閉
   open: boolean;
+  // 回答ボタン無効
+  disabledAnswer: boolean;
 }
 
 class App extends React.Component<Props, State> {
@@ -47,6 +49,7 @@ class App extends React.Component<Props, State> {
       currentId: "init",
       dataset: defaultDataset,
       open: false,
+      disabledAnswer: false,
     };
     // コールバック関数, bindすると再作成されずパフォーマンス的に良い
     this.selectAnswer = this.selectAnswer.bind(this);
@@ -71,32 +74,34 @@ class App extends React.Component<Props, State> {
   selectAnswer = (answer: AnswersContent) => {
     const selectedAnswer = answer.content;
     const nextQuestionId = answer.nextId;
-    switch (true) {
-      case nextQuestionId === "init":
-        // 最初は質問のみ設定
-        this.displayNextQuestion(nextQuestionId);
-        break;
-      default:
-        // チャットに回答追加
-        const chats = this.state.chats;
-        chats.push({
-          text: selectedAnswer,
-          type: "answer",
-        });
-        this.setState({
-          chats: chats,
-        });
-        // 次の質問設定
-        this.displayNextQuestion(nextQuestionId);
-        break;
-    }
-    console.log(this.state.chats);
+    // チャットに回答追加
+    const chats = this.state.chats;
+    chats.push({
+      text: selectedAnswer,
+      type: "answer",
+    });
+    this.setState({
+      chats: chats,
+      // 回答ボタンを無効化
+      disabledAnswer: true,
+    });
+
+    // 少し待ってから次の質問表示
+    setTimeout(() => {
+      this.displayNextQuestion(nextQuestionId)
+      // 回答ボタンを有効可
+      this.setState({
+        disabledAnswer: false
+      })
+    }, 500);
+
+
   };
 
   // 初期化後の処理
   componentDidMount() {
-    const initAnswer = "";
-    this.selectAnswer({ content: initAnswer, nextId: this.state.currentId });
+    // 最初の質問表示
+    this.displayNextQuestion(this.state.currentId)
   }
 
   // コンポーネント更新直後の処理
@@ -104,7 +109,10 @@ class App extends React.Component<Props, State> {
     // 一番下にスクロール, #scroll-areaはChatsの属性
     const scrollArea = document.getElementById("scroll-area");
     if (scrollArea) {
-      scrollArea.scrollTop = scrollArea.scrollHeight;
+      scrollArea.scrollTo({
+        top: scrollArea.scrollHeight,
+        behavior: 'smooth'
+      })
     }
   }
 
@@ -114,7 +122,7 @@ class App extends React.Component<Props, State> {
         <p style={{ textAlign: "center", marginTop: "2rem" }}>Test Deploy</p>
         <div className="c-box">
           <Chats chats={this.state.chats} />
-          <AnswersList answers={this.state.answers} select={this.selectAnswer} />
+          <AnswersList answers={this.state.answers} disabled={this.state.disabledAnswer} select={this.selectAnswer}  />
         </div>
       </section>
     );

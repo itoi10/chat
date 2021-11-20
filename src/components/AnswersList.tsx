@@ -4,14 +4,15 @@ import { AnswersContent } from "../App";
 
 interface Props {
   answers: AnswersContent[];
+  disabled: boolean
   select: (answer: AnswersContent) => void;
 }
 
-const AnswersList: React.FC<Props> = ({ answers, select }) => {
+const AnswersList: React.FC<Props> = ({ answers, disabled, select }) => {
   return (
     <div className="c-grid__answer">
       {answers.map((answer, index) => (
-        <Answer answer={answer} key={index} select={select} />
+        <Answer key={index} answer={answer} disabled={disabled} select={select} />
       ))}
     </div>
   );
