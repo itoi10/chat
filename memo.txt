@@ -1,0 +1,19 @@
+// MUI Lists
+// https://mui.com/components/lists/
+
+// MUI ver.5(2021年9月)からsx propという新機能が使えるのでmakeStylesなくてもOK
+// ただしstyledよりもパフォーマンスが悪いらしい
+// https://mui.com/system/the-sx-prop/
+
+// const useStyles = makeStyles((theme: Theme) =>
+//   createStyles({
+//     root: {
+//       width: '100%',
+//       maxWidth: '36ch',
+//       backgroundColor: theme.palette.background.paper,
+//     },
+//     inline: {
+//       display: 'inline'
+//     }
+//   })
+// );

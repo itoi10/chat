@@ -32,3 +32,20 @@
   justify-content: flex-end;
   height: 192px;
 }
+
+/* チャット吹き出し */
+.p-chat__bubble {
+  /* 背景色 */
+  background: #41B5E6;
+  /* 文字 */
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  /* 形 */
+  border-radius: 4px;
+  /* サイズ */
+  padding: .5rem;
+  margin-right: 1rem;
+  max-width: 80%;
+  width: auto;
+}

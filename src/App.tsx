@@ -4,13 +4,12 @@ import './assets/styles/style.css'
 import { AnswersList, Chats } from './components/index'
 
 
-
-// interface Chats {
-//   // チャット本文
-//   text: string
-//   // 質問or回答
-//   type: string
-// }
+export interface ChatsContent {
+  // チャット本文
+  text: string
+  // 質問or回答
+  type: string
+}
 
 export interface Answers {
   // 回答内容
@@ -33,7 +32,7 @@ interface State {
   // 回答コンポーネントに表示するデータ
   answers: Array<Answers>
   // チャットコンポーネントに表示するデータ
-  chats: Array<string>
+  chats: Array<ChatsContent>
   // 現在の質問ID
   currentId: string,
   // 質問と回答のデータセット
@@ -63,16 +62,31 @@ class App extends React.Component<Props, State> {
     })
   }
 
+  initChats = () => {
+    const initDataset = this.state.dataset[0]
+    const chat:ChatsContent = {
+      text: initDataset.question,
+      type: 'question'
+    }
+    const chats = this.state.chats
+    chats.push(chat)
+    this.setState({
+      chats: chats
+    })
+  }
+
   // 初期化後の処理
   componentDidMount() {
+    this.initChats()
     this.initAnswer()
   }
 
   render(): React.ReactNode {
     return (
       <section className="c-section">
+        <p style={{textAlign: 'center', marginTop: '2rem'}}>Test Deploy</p>
         <div className="c-box">
-          <Chats />
+          <Chats chats={this.state.chats}/>
           <AnswersList answers={this.state.answers}/>
         </div>
       </section>
