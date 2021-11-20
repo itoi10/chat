@@ -1,16 +1,16 @@
 import React from 'react';
 import  defaultDataset from './data/dataset'
 import './assets/styles/style.css'
-import { AnswersList } from './components/index'
+import { AnswersList, Chats } from './components/index'
 
 
 
-export interface Chats {
-  // チャット本文
-  text: string
-  // 質問or回答
-  type: string
-}
+// interface Chats {
+//   // チャット本文
+//   text: string
+//   // 質問or回答
+//   type: string
+// }
 
 export interface Answers {
   // 回答内容
@@ -72,6 +72,7 @@ class App extends React.Component<Props, State> {
     return (
       <section className="c-section">
         <div className="c-box">
+          <Chats />
           <AnswersList answers={this.state.answers}/>
         </div>
       </section>
