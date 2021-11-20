@@ -4,7 +4,7 @@
 
 YouTube 講座を参考にチャットボット作成
 
-元講座は JavaScript だが TypeScript で実践
+React, TypeScript
 
 ## Deploy
 

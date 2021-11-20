@@ -1,5 +1,6 @@
 import React from 'react'
 import Button from '@material-ui/core/Button'
+import { makeStyles, createStyles, Theme } from '@material-ui/core/styles'
 import { AnswersContent } from '../App'
 
 interface Props {
@@ -7,14 +8,32 @@ interface Props {
   select: (answer: AnswersContent) => void
 }
 
+// Material-UIデザインのカスタマイズ
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    "button": {
+      borderColor: "#FFB549",
+      color: "#FFB549",
+      fontWeight: 600,
+      marginBottom: "8px",
+      "&:hover": {
+        backgroundColor: "#FFB549",
+        color: "#FFF"
+      }
+    }
+  })
+);
+
 const Answer:React.FC<Props> = ({answer, select}) => {
+  const classes = useStyles()
 
   return (
-    <>
-      <Button variant="contained" color="primary" onClick={() => select(answer)}>
-        {answer.content}
-      </Button>
-    </>
+    <Button
+      className={classes.button} variant="outlined"
+      onClick={() => select(answer)}
+    >
+      {answer.content}
+    </Button>
   )
 }
 
