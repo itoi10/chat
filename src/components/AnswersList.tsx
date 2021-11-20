@@ -4,7 +4,7 @@ import { AnswersContent } from "../App";
 
 interface Props {
   answers: AnswersContent[];
-  disabled: boolean
+  disabled: boolean;
   select: (answer: AnswersContent) => void;
 }
 

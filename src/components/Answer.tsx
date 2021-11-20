@@ -29,11 +29,7 @@ const Answer: React.FC<Props> = ({ answer, disabled, select }) => {
   const classes = useStyles();
 
   return (
-    <Button
-      className={classes.button} variant="outlined"
-      disabled={disabled}
-      onClick={() => select(answer)}
-    >
+    <Button className={classes.button} variant="outlined" disabled={disabled} onClick={() => select(answer)}>
       {answer.content}
     </Button>
   );

@@ -82,26 +82,32 @@ class App extends React.Component<Props, State> {
     });
     this.setState({
       chats: chats,
-      // 回答ボタンを無効化
+      // 回答ボタン無効化
       disabledAnswer: true,
     });
 
-    // 少し待ってから次の質問表示
-    setTimeout(() => {
-      this.displayNextQuestion(nextQuestionId)
-      // 回答ボタンを有効可
-      this.setState({
-        disabledAnswer: false
-      })
-    }, 500);
-
-
+    // nextIdがhttp〜ならリンクを開く
+    if (/^https?:*/.test(nextQuestionId)) {
+      const a = document.createElement("a");
+      a.href = nextQuestionId;
+      a.target = "_blank";
+      a.click();
+      // 回答ボタン有効可
+      this.setState({ disabledAnswer: false });
+    } else {
+      // 少し待ってから次の質問表示
+      setTimeout(() => {
+        this.displayNextQuestion(nextQuestionId);
+        // 回答ボタン有効可
+        this.setState({ disabledAnswer: false });
+      }, 500);
+    }
   };
 
   // 初期化後の処理
   componentDidMount() {
     // 最初の質問表示
-    this.displayNextQuestion(this.state.currentId)
+    this.displayNextQuestion(this.state.currentId);
   }
 
   // コンポーネント更新直後の処理
@@ -111,8 +117,8 @@ class App extends React.Component<Props, State> {
     if (scrollArea) {
       scrollArea.scrollTo({
         top: scrollArea.scrollHeight,
-        behavior: 'smooth'
-      })
+        behavior: "smooth",
+      });
     }
   }
 
@@ -122,7 +128,7 @@ class App extends React.Component<Props, State> {
         <p style={{ textAlign: "center", marginTop: "2rem" }}>Test Deploy</p>
         <div className="c-box">
           <Chats chats={this.state.chats} />
-          <AnswersList answers={this.state.answers} disabled={this.state.disabledAnswer} select={this.selectAnswer}  />
+          <AnswersList answers={this.state.answers} disabled={this.state.disabledAnswer} select={this.selectAnswer} />
         </div>
       </section>
     );
