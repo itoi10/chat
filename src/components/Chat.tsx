@@ -11,10 +11,17 @@ interface Props {
 
 const Chat:React.FC<Props> = ({chat}) => {
 
+  const isQuestion:boolean = chat.type === 'question'
+  const classes = isQuestion ? 'p-chat__row' : 'p-chat__reverse'
+
   return(
-    <ListItem>
+    <ListItem className={classes}>
       <ListItemAvatar>
-        <Avatar alt="icon" src="/static/images/avatar/1.jpg" />
+        {isQuestion ? (
+          <Avatar alt="Q" src="/static/images/avatar/1.jpg" />
+        ) : (
+          <Avatar alt="A" src="/static/images/avatar/2.jpg" />
+        )}
       </ListItemAvatar>
       <div className="p-chat__bubble">
         {chat.text}

@@ -3,15 +3,17 @@ import  defaultDataset from './data/dataset'
 import './assets/styles/style.css'
 import { AnswersList, Chats } from './components/index'
 
+interface Props {
+}
 
 export interface ChatsContent {
   // チャット本文
   text: string
   // 質問or回答
-  type: string
+  type: "question" | "answer"
 }
 
-export interface Answers {
+export interface AnswersContent {
   // 回答内容
   content: string
   // 次の質問のID
@@ -19,24 +21,19 @@ export interface Answers {
 }
 
 export interface Dataset {
-  id:       string;
-  answers:  Answers[];
+  answers:  AnswersContent[];
   question: string;
-}
-
-
-interface Props {
 }
 
 interface State {
   // 回答コンポーネントに表示するデータ
-  answers: Array<Answers>
+  answers: AnswersContent[]
   // チャットコンポーネントに表示するデータ
-  chats: Array<ChatsContent>
+  chats: ChatsContent[]
   // 現在の質問ID
   currentId: string,
   // 質問と回答のデータセット
-  dataset: Array<Dataset>,
+  dataset: {[key: string]: Dataset},
   // 問い合わせフォーム用モーダルの開閉
   open: boolean
 }
@@ -52,33 +49,55 @@ class App extends React.Component<Props, State> {
       dataset: defaultDataset,
       open: false,
     }
+    // コールバック関数, bindすると再作成されずパフォーマンス的に良い
+    this.selectAnswer = this.selectAnswer.bind(this)
   }
 
-  initAnswer = () => {
-    const initDataset = this.state.dataset[0]
-    const initAnswers = initDataset.answers
-    this.setState({
-      answers: initAnswers
-    })
-  }
-
-  initChats = () => {
-    const initDataset = this.state.dataset[0]
-    const chat:ChatsContent = {
-      text: initDataset.question,
-      type: 'question'
-    }
+  // 次の質問を表示
+  displayNextQuestion = (nextQuestionId:string) => {
     const chats = this.state.chats
-    chats.push(chat)
-    this.setState({
-      chats: chats
+    // チャットに質問追加
+    chats.push({
+      text: this.state.dataset[nextQuestionId].question,
+      type: 'question'
     })
+    this.setState({
+      answers: this.state.dataset[nextQuestionId].answers,
+      chats: chats,
+      currentId: nextQuestionId
+    })
+  }
+
+  // 回答選択, propsで各選択肢のonClickに渡される
+  selectAnswer = (answer: AnswersContent) => {
+    const selectedAnswer = answer.content
+    const nextQuestionId = answer.nextId
+    switch(true) {
+      case (nextQuestionId === 'init'):
+        // 最初は質問のみ設定
+        this.displayNextQuestion(nextQuestionId)
+        break
+      default:
+        // チャットに回答追加
+        const chats = this.state.chats
+        chats.push({
+          text: selectedAnswer,
+          type: 'answer'
+        })
+        this.setState({
+          chats: chats
+        })
+        // 次の質問設定
+        this.displayNextQuestion(nextQuestionId)
+        break
+    }
+    console.log(this.state.chats)
   }
 
   // 初期化後の処理
   componentDidMount() {
-    this.initChats()
-    this.initAnswer()
+    const initAnswer = ""
+    this.selectAnswer({content: initAnswer, nextId: this.state.currentId})
   }
 
   render(): React.ReactNode {
@@ -87,7 +106,7 @@ class App extends React.Component<Props, State> {
         <p style={{textAlign: 'center', marginTop: '2rem'}}>Test Deploy</p>
         <div className="c-box">
           <Chats chats={this.state.chats}/>
-          <AnswersList answers={this.state.answers}/>
+          <AnswersList answers={this.state.answers} select={this.selectAnswer}/>
         </div>
       </section>
     );

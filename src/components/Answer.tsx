@@ -1,30 +1,18 @@
 import React from 'react'
 import Button from '@material-ui/core/Button'
-// import { makeStyles, createStyles, Theme } from '@material-ui/core/styles'
-
+import { AnswersContent } from '../App'
 
 interface Props {
-  content: string
+  answer: AnswersContent
+  select: (answer: AnswersContent) => void
 }
 
-
-// Material-UIデザインのカスタマイズ
-// const useStyles = makeStyles((theme: Theme) =>
-//   createStyles({
-//     root: {
-
-//     },
-//   })
-// );
-
-
-const Answer:React.FC<Props> = ({content}) => {
-  // const classes = useStyles()
+const Answer:React.FC<Props> = ({answer, select}) => {
 
   return (
     <>
-      <Button variant="contained" color="primary">
-        {content}
+      <Button variant="contained" color="primary" onClick={() => select(answer)}>
+        {answer.content}
       </Button>
     </>
   )

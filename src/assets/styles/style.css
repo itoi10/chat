@@ -49,3 +49,19 @@
   max-width: 80%;
   width: auto;
 }
+
+/* チャットの向き */
+/* 左から */
+.p-chat__row {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  padding-right: 0 !important;
+}
+/* 右から */
+.p-chat__reverse {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+  padding-right: 0 !important;
+}
