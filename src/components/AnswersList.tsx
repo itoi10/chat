@@ -1,21 +1,20 @@
-import React from 'react'
-import { Answer } from './index'
-import { AnswersContent } from '../App'
+import React from "react";
+import { Answer } from "./index";
+import { AnswersContent } from "../App";
 
 interface Props {
-  answers: AnswersContent[]
-  select: (answer: AnswersContent) => void
+  answers: AnswersContent[];
+  select: (answer: AnswersContent) => void;
 }
 
-const AnswersList:React.FC<Props> = ({answers, select}) => {
-
+const AnswersList: React.FC<Props> = ({ answers, select }) => {
   return (
-    <div className='c-grid__answer'>
+    <div className="c-grid__answer">
       {answers.map((answer, index) => (
-        <Answer answer={answer} key={index} select={select}/>
+        <Answer answer={answer} key={index} select={select} />
       ))}
     </div>
-  )
-}
+  );
+};
 
-export default AnswersList
+export default AnswersList;

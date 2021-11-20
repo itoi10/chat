@@ -28,6 +28,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "deploy": "yarn build && firebase deploy",
+    "lint-fix": "eslint --fix './src/**/*.{js,jsx,ts,tsx}' && prettier --write './src/**/*.{js,jsx,ts,tsx}'",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -47,5 +48,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "prettier": "2.4.1"
   }
 }

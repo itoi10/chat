@@ -2,9 +2,9 @@
 
 ## Description
 
-YouTube 講座を参考にチャットボット作成
+YouTube 講座を参考に React でチャットボット作成
 
-React, TypeScript
+参考元は JavaScript だが TypeScript に置き換えて開発
 
 ## Deploy
 

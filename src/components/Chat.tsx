@@ -1,20 +1,18 @@
-import React from 'react'
-import ListItem from '@mui/material/ListItem';
-import ListItemAvatar from '@mui/material/ListItemAvatar';
-import Avatar from '@mui/material/Avatar';
-import { ChatsContent } from '../App'
-
+import React from "react";
+import ListItem from "@mui/material/ListItem";
+import ListItemAvatar from "@mui/material/ListItemAvatar";
+import Avatar from "@mui/material/Avatar";
+import { ChatsContent } from "../App";
 
 interface Props {
-  chat: ChatsContent
+  chat: ChatsContent;
 }
 
-const Chat:React.FC<Props> = ({chat}) => {
+const Chat: React.FC<Props> = ({ chat }) => {
+  const isQuestion: boolean = chat.type === "question";
+  const classes = isQuestion ? "p-chat__row" : "p-chat__reverse";
 
-  const isQuestion:boolean = chat.type === 'question'
-  const classes = isQuestion ? 'p-chat__row' : 'p-chat__reverse'
-
-  return(
+  return (
     <ListItem className={classes}>
       <ListItemAvatar>
         {isQuestion ? (
@@ -23,11 +21,9 @@ const Chat:React.FC<Props> = ({chat}) => {
           <Avatar alt="A" src="/static/images/avatar/2.jpg" />
         )}
       </ListItemAvatar>
-      <div className="p-chat__bubble">
-        {chat.text}
-      </div>
+      <div className="p-chat__bubble">{chat.text}</div>
     </ListItem>
-  )
-}
+  );
+};
 
-export default Chat
+export default Chat;
