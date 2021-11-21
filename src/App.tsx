@@ -1,7 +1,8 @@
 import React from "react";
-import defaultDataset from "./data/dataset";
 import "./assets/styles/style.scss";
 import { AnswersList, Chats, FormDialog } from "./components/index";
+import defaultDataset from "./data/dataset";
+import { firestore } from "./firebase/index";
 
 interface Props {}
 
@@ -40,14 +41,20 @@ interface State {
 }
 
 class App extends React.Component<Props, State> {
+  // firestoreから取得するか
+  fetchFireStore = false;
+
   constructor(props: Props) {
     super(props);
+
+    // firestoreから取得しないならファイルから読み込み
+    const dataset = this.fetchFireStore ? {} : defaultDataset;
 
     this.state = {
       answers: [],
       chats: [],
       currentId: "init",
-      dataset: defaultDataset,
+      dataset: dataset,
       open: false,
       disabledAnswer: false,
     };
@@ -113,10 +120,37 @@ class App extends React.Component<Props, State> {
     }
   };
 
+  initDataset = (dataset: { [key: string]: Dataset }) => {
+    this.setState({ dataset: dataset });
+  };
+
   // 初期化後の処理
   componentDidMount() {
-    // 最初の質問表示
-    this.displayNextQuestion(this.state.currentId);
+    // firestoreから取得する場合
+    if (this.fetchFireStore) {
+      // async付き即時関数。読み込みを待ってから次の処理に行く
+      // 即時関数 https://qiita.com/katsukii/items/cfe9fd968ba0db603b1e
+      (async () => {
+        const dataset = this.state.dataset;
+        // firestoreからデータ取得
+        await firestore
+          .collection("questions")
+          .get()
+          .then((snapshots) => {
+            snapshots.forEach((doc) => {
+              dataset[doc.id] = doc.data() as Dataset;
+            });
+          });
+        // stateに設定
+        this.initDataset(dataset);
+        // 最初の質問表示
+        this.displayNextQuestion(this.state.currentId);
+      })();
+    }
+    // ファイルから取得する場合
+    else {
+      this.displayNextQuestion(this.state.currentId);
+    }
   }
 
   // コンポーネント更新直後の処理

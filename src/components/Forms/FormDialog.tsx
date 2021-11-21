@@ -73,8 +73,9 @@ class FormDialog extends React.Component<Props, State> {
         valid.push(`${col}を入力してください`);
       }
     }
-    // メールアドレスチェック
-    const pattern = /^[A-Za-z0-9]{1}[A-Za-z0-9_.-]*@{1}[A-Za-z0-9_.-]{1,}.[A-Za-z0-9]{1,}$/;
+    // メールアドレスチェック http://emailregex.com/
+    const pattern =
+      /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if (email !== "" && !pattern.test(email)) {
       valid.push("メールアドレスの形式が間違っています");
     }
@@ -104,7 +105,9 @@ class FormDialog extends React.Component<Props, State> {
         this.props.handleClose();
         this.setState({ name: "", email: "", description: "" });
       });
-    } else {
+    }
+    // テスト用
+    else {
       alert(`入力チェックOK!\n\n` + `___メッセージ内容___\n` + `${payload.text}\n` + `_________________`);
       this.props.handleClose();
       this.setState({ name: "", email: "", description: "" });

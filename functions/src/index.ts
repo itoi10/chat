@@ -7,7 +7,7 @@ import * as admin from "firebase-admin";
 // 初期化
 admin.initializeApp();
 // admin権限でFirestore操作
-const db = admin.firestore();
+const firestore = admin.firestore();
 
 const sendResponse = (response: functions.Response, statusCode: number, body: any) => {
   response.send({
@@ -26,7 +26,7 @@ export const addDataset = functions.https.onRequest(async (req: functions.Reques
     for (const key of Object.keys(dataset)) {
       const data = dataset[key];
       // qustionsコレクションにデータ追加
-      await db.collection("questions").doc(key).set(data);
+      await firestore.collection("questions").doc(key).set(data);
       num += 1;
     }
     sendResponse(res, 200, { message: `Successfully added dataset (${num})` });
