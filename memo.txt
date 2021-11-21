@@ -34,3 +34,6 @@ https://ja.reactjs.org/docs/lists-and-keys.html
 scss導入
 $ yarn add node-sass
 .css → .scss, 参照修正
+
+// Start writing Firebase Functions
+// https://firebase.google.com/docs/functions/typescript

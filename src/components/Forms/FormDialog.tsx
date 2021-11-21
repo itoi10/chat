@@ -105,12 +105,7 @@ class FormDialog extends React.Component<Props, State> {
         this.setState({ name: "", email: "", description: "" });
       });
     } else {
-      alert(
-        `入力チェックOK!\n\n` +
-          `________________メッセージ内容________________\n` +
-          `${payload.text}\n` +
-          `____________________________________________`
-      );
+      alert(`入力チェックOK!\n\n` + `___メッセージ内容___\n` + `${payload.text}\n` + `_________________`);
       this.props.handleClose();
       this.setState({ name: "", email: "", description: "" });
     }
@@ -121,7 +116,7 @@ class FormDialog extends React.Component<Props, State> {
     return (
       <Dialog
         open={this.props.open}
-        onClose={this.closeForm}
+        // onClose={this.closeForm}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >

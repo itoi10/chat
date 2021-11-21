@@ -10,9 +10,9 @@ const defaultDataset = {
   },
   q1: {
     answers: [
-      { content: "🔗　天気を知りたい", nextId: "https://tenki.jp/" },
-      { content: "🔗　Googleで検索したい", nextId: "https://www.google.com/" },
-      { content: "🔗　Reactについて知りたい", nextId: "https://ja.reactjs.org/" },
+      { content: "🔗 天気を知りたい", nextId: "https://tenki.jp/" },
+      { content: "🔗 Googleで検索したい", nextId: "https://www.google.com/" },
+      { content: "🔗 Reactについて知りたい", nextId: "https://ja.reactjs.org/" },
       { content: "最初に戻る", nextId: "init" },
     ],
     question: "リンクを開きます",
