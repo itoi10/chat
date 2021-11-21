@@ -51,17 +51,17 @@
 }
 
 /* チャットの向き */
+@mixin p-chat__common($flexDirection, $justifyContent) {
+  display: flex;
+  flex-direction: $flexDirection;
+  justify-content: $justifyContent;
+  padding-right: 0 !important;
+}
 /* 左から */
 .p-chat__row {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  padding-right: 0 !important;
+  @include p-chat__common(row, flex-start);
 }
 /* 右から */
 .p-chat__reverse {
-  display: flex;
-  flex-direction: row-reverse;
-  justify-content: flex-end;
-  padding-right: 0 !important;
+  @include p-chat__common(row-reverse, flex-end);
 }

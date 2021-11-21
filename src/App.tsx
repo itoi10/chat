@@ -1,6 +1,6 @@
 import React from "react";
 import defaultDataset from "./data/dataset";
-import "./assets/styles/style.css";
+import "./assets/styles/style.scss";
 import { AnswersList, Chats, FormDialog } from "./components/index";
 
 interface Props {}
