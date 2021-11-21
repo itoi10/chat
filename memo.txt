@@ -37,3 +37,6 @@ $ yarn add node-sass
 
 // Start writing Firebase Functions
 // https://firebase.google.com/docs/functions/typescript
+
+// async付き即時関数。
+// 即時関数 https://qiita.com/katsukii/items/cfe9fd968ba0db603b1e
