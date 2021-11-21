@@ -2,7 +2,7 @@ const defaultDataset = {
   init: {
     answers: [
       { content: "リンクを開く", nextId: "q1" },
-      { content: "回答２", nextId: "q2" },
+      { content: "お問い合わせ", nextId: "q2" },
       { content: "回答３", nextId: "q3" },
       { content: "回答４", nextId: "q4" },
     ],
@@ -19,12 +19,10 @@ const defaultDataset = {
   },
   q2: {
     answers: [
-      { content: "Answer 2-1 (最初に戻る)", nextId: "init" },
-      { content: "Answer 2-2 (最初に戻る)", nextId: "init" },
-      { content: "Answer 2-3 (最初に戻る)", nextId: "init" },
-      { content: "Answer 2-4 (最初に戻る)", nextId: "init" },
+      { content: "お問い合わせ画面を開く", nextId: "contact" },
+      { content: "最初に戻る", nextId: "init" },
     ],
-    question: "質問２",
+    question: "お問い合わせ画面を開きます",
   },
   q3: {
     answers: [

@@ -22,3 +22,7 @@
 # リストと key
 リストのkeyは文字列型が推奨されている
 https://ja.reactjs.org/docs/lists-and-keys.html
+
+
+// MUI Dialog Alerts
+// https://mui.com/components/dialogs/#alerts

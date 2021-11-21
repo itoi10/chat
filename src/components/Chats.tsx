@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme: Theme) =>
     chats: {
       height: 384,
       padding: "0",
-      // 高さを超えた時
+      // 高さを超えた時スクロールバー
       overflow: "auto",
     },
   })

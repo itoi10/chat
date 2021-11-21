@@ -1,7 +1,7 @@
 import React from "react";
 import defaultDataset from "./data/dataset";
 import "./assets/styles/style.css";
-import { AnswersList, Chats } from "./components/index";
+import { AnswersList, Chats, FormDialog } from "./components/index";
 
 interface Props {}
 
@@ -53,6 +53,8 @@ class App extends React.Component<Props, State> {
     };
     // コールバック関数, bindすると再作成されずパフォーマンス的に良い
     this.selectAnswer = this.selectAnswer.bind(this);
+    this.handleClose = this.handleClose.bind(this);
+    this.handleClickOpen = this.handleClickOpen.bind(this);
   }
 
   // 次の質問を表示
@@ -74,7 +76,8 @@ class App extends React.Component<Props, State> {
   selectAnswer = (answer: AnswersContent) => {
     const selectedAnswer = answer.content;
     const nextQuestionId = answer.nextId;
-    // チャットに回答追加
+
+    // チャット表示に選択した回答を追加
     const chats = this.state.chats;
     chats.push({
       text: selectedAnswer,
@@ -82,25 +85,31 @@ class App extends React.Component<Props, State> {
     });
     this.setState({
       chats: chats,
-      // 回答ボタン無効化
-      disabledAnswer: true,
     });
 
-    // nextIdがhttp〜ならリンクを開く
-    if (/^https?:*/.test(nextQuestionId)) {
-      const a = document.createElement("a");
-      a.href = nextQuestionId;
-      a.target = "_blank";
-      a.click();
-      // 回答ボタン有効可
-      this.setState({ disabledAnswer: false });
-    } else {
-      // 少し待ってから次の質問表示
-      setTimeout(() => {
-        this.displayNextQuestion(nextQuestionId);
-        // 回答ボタン有効可
-        this.setState({ disabledAnswer: false });
-      }, 500);
+    switch (true) {
+      // お問い合わせモーダルを開く
+      case nextQuestionId === "contact":
+        this.handleClickOpen();
+        break;
+
+      // nextIdがhttp〜ならリンクを開く
+      case /^https?:*/.test(nextQuestionId):
+        const a = document.createElement("a");
+        a.href = nextQuestionId;
+        a.target = "_blank";
+        a.rel = "noopener noreferrer";
+        a.click();
+        break;
+
+      // 一般的な回答処理
+      default:
+        // 少し待ってから次の質問を表示。その間回答ボタンは無効化する
+        this.setState({ disabledAnswer: true });
+        setTimeout(() => {
+          this.displayNextQuestion(nextQuestionId);
+          this.setState({ disabledAnswer: false });
+        }, 500);
     }
   };
 
@@ -122,6 +131,14 @@ class App extends React.Component<Props, State> {
     }
   }
 
+  handleClickOpen = () => {
+    this.setState({ open: true });
+  };
+
+  handleClose = () => {
+    this.setState({ open: false });
+  };
+
   render(): React.ReactNode {
     return (
       <section className="c-section">
@@ -129,6 +146,7 @@ class App extends React.Component<Props, State> {
         <div className="c-box">
           <Chats chats={this.state.chats} />
           <AnswersList answers={this.state.answers} disabled={this.state.disabledAnswer} select={this.selectAnswer} />
+          <FormDialog open={this.state.open} handleClose={this.handleClose} />
         </div>
       </section>
     );

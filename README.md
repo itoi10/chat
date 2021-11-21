@@ -1,29 +1,25 @@
-# Chatbot
+# [Chatbot](https://chatbot-a99d5.web.app/)
 
-## Description
+## 概要
 
 YouTube 講座を参考に React でチャットボット作成
 
 参考元は JavaScript だが TypeScript に置き換えて開発
 
-## Deploy
-
-[Firebase](https://chatbot-a99d5.web.app/)
-
-## Setup
+## 導入方法
 
 ```
 yarn install
 yarn start
 ```
 
-Run eslint and prettier
+コードフォーマット
 
 ```
-yarn lint-fix
+yarn lint
 ```
 
-## References
+## 参考
 
 日本一わかりやすい React 入門【実践編】#1...React でチャットボットを作ろう<br/>
 https://www.youtube.com/watch?v=MzJkWO73S70

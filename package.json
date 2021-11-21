@@ -28,7 +28,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "deploy": "yarn build && firebase deploy",
-    "lint-fix": "eslint --fix './src/**/*.{js,jsx,ts,tsx}' && prettier --write './src/**/*.{js,jsx,ts,tsx}'",
+    "lint": "eslint --fix './src/**/*.{js,jsx,ts,tsx}' && prettier --write './src/**/*.{js,jsx,ts,tsx}'",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
