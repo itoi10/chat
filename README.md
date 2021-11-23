@@ -2,11 +2,15 @@
 
 ## 概要
 
-YouTube 講座を参考に React でチャットボット作成
+YouTube で公開されている講座を参考に React で作成したチャットボット。
 
-参考元は JavaScript だが TypeScript に置き換えて開発
+参考元は JavaScript ですが TypeScript で作っています。
 
-## 導入方法
+## デプロイ
+
+[Firebase](https://chatbot-a99d5.web.app/)
+
+## セットアップ
 
 ```
 yarn install

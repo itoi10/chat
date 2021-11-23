@@ -21,7 +21,11 @@ const Chat: React.FC<Props> = ({ chat }) => {
           <Avatar alt="A" src="/static/images/avatar/2.jpg" />
         )}
       </ListItemAvatar>
-      <div className="p-chat__bubble">{chat.text}</div>
+      {isQuestion ? (
+        <div className="p-chat__bubble_q">{chat.text}</div>
+      ) : (
+        <div className="p-chat__bubble_a">{chat.text}</div>
+      )}
     </ListItem>
   );
 };

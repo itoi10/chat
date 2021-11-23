@@ -13,15 +13,15 @@ interface Props {
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     button: {
-      borderColor: "#FFB549",
-      color: "#FFB549",
+      backgroundColor: "#464646",
+      color: "#fff",
       fontWeight: 600,
-      marginBottom: "8px",
+      margin: "0 .5em 8px .5em",
       "&:hover": {
-        backgroundColor: "#FFB549",
+        backgroundColor: "#464646",
         color: "#FFF",
       },
-      height: "30%",
+      height: "20%",
       fontSize: "0.95em",
     },
   })

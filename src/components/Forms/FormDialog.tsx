@@ -125,7 +125,7 @@ class FormDialog extends React.Component<Props, State> {
       >
         <DialogTitle id="alert-dialog-title">お問い合わせフォーム</DialogTitle>
         <DialogContent>
-          <DialogContentText>※テストなので実際に送信はしません</DialogContentText>
+          <DialogContentText>※デモアプリなので実際に送信はしません</DialogContentText>
           {this.state.validation &&
             this.state.validation.map((val, key) => (
               <DialogContentText key={key.toString()} sx={{ color: "orange" }}>

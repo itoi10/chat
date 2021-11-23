@@ -8,48 +8,60 @@
 /* チャットボックスの外枠 */
 .c-box {
   /* 背景色 */
-  background: #fff;
+  background:rgb(37, 142, 223);
   /* ボーダー */
   border: 1px solid rgba(0,0,0,0.3);
   border-radius: 4px;
   box-sizing: border-box;
   /* サイズ */
   // height: 592px;
-  max-height: 700px;
+  max-height: 800px;
   height: 100%;
   max-width: 432px;
-  padding: 0 1rem;
+  // padding: 0 1rem;
   width: 100%;
   /* 上下左右中央寄せ */
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+
 }
 
 /* アンサーの外枠 */
 .c-grid__answer {
+  background-color: #000;
   display: flex;
   flex-flow: column;
   justify-content: flex-end;
-  height: 192px;
+  height: 27.5%;
+  position: absolute;
+  width: 100%;
+  bottom: 0;
 }
 
-/* チャット吹き出し */
-.p-chat__bubble {
-  /* 背景色 */
-  background: #41B5E6;
-  /* 文字 */
-  color: #fff;
-  font-size: 0.95em;
-  font-weight: 500;
-  /* 形 */
-  border-radius: 4px;
-  /* サイズ */
-  padding: .5rem;
-  margin-right: 1rem;
-  max-width: 80%;
-  width: auto;
+@mixin p-chat__bubble($backBround) {
+    /* 背景色 */
+    background: $backBround;
+    /* 文字 */
+    color: #000;
+    font-size: 0.95em;
+    font-weight: 500;
+    /* 形 */
+    border-radius: 10px;
+    /* サイズ */
+    padding: .5rem;
+    margin-right: 1rem;
+    max-width: 80%;
+    width: auto;
+}
+
+.p-chat__bubble_q{
+  @include p-chat__bubble(#fff);
+}
+
+.p-chat__bubble_a{
+  @include p-chat__bubble(#4df080);
 }
 
 /* チャットの向き */

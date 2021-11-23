@@ -1,45 +1,50 @@
 {
   "init": {
     "answers": [
-      { "content": "リンクを開く", "nextId": "q1" },
-      { "content": "お問い合わせ", "nextId": "q2" },
-      { "content": "回答３", "nextId": "q3" },
-      { "content": "回答４", "nextId": "q4" }
+      { "content": "天気を知りたい", "nextId": "tenki" },
+      { "content": "クイズをしたい", "nextId": "quiz" },
+      { "content": "お問い合わせ画面", "nextId": "contact" },
+      { "content": "このアプリについて", "nextId": "aboutapp" }
     ],
     "question": "こんにちは！ご用件は何でしょうか？"
   },
-  "q1": {
+  "tenki": {
     "answers": [
-      { "content": "🔗 天気を知りたい", "nextId": "https://tenki.jp/" },
-      { "content": "🔗 Googleで検索したい", "nextId": "https://www.google.com/" },
-      { "content": "🔗 Reactについて知りたい", "nextId": "https://ja.reactjs.org/" },
-      { "content": "最初に戻る", "nextId": "init" }
+      {"content":"東京", "nextId": "weather-tokyo"},
+      {"content":"大阪", "nextId": "weather-osaka"},
+      {"content":"福岡", "nextId": "weather-fukuoka"},
+      {"content":"最初に戻る", "nextId": "init"}
     ],
-    "question": "リンクを開きます"
+    "question": "どこの天気が知りたいですか？"
   },
-  "q2": {
+  "aboutapp": {
     "answers": [
-      { "content": "お問い合わせ画面を開く", "nextId": "contact" },
-      { "content": "最初に戻る", "nextId": "init" }
+      {"content":"🔗 解説している方の動画を見る", "nextId": "https://www.youtube.com/watch?v=MzJkWO73S70"},
+      {"content":"🔗 このアプリのコードを開く", "nextId": "https://github.com/itoi10/chatbot"},
+      {"content":"🔗 Reactについて", "nextId": "https://ja.reactjs.org/"},
+      {"content":"最初に戻る", "nextId": "init"}
     ],
-    "question": "お問い合わせ画面を開きます"
+    "question": "このアプリはReactの学習用にYouTubeで公開されている講座を参考に作ったチャットボットです。"
   },
-  "q3": {
+  "quiz": {
     "answers": [
-      { "content": "Answer 3-1 (最初に戻る)", "nextId": "init" },
-      { "content": "Answer 3-2 (最初に戻る)", "nextId": "init" },
-      { "content": "Answer 3-3 (最初に戻る)", "nextId": "init" },
-      { "content": "Answer 3-4 (最初に戻る)", "nextId": "init" }
+      {"content":"槍が岳", "nextId": "quiz-x"},
+      {"content":"谷川岳", "nextId": "quiz-x"},
+      {"content":"北岳", "nextId": "quiz-o"},
+      {"content":"立山", "nextId": "quiz-x"}
     ],
-    "question": "質問３"
+    "question": "日本で一番高い山は富士山ですが、２番目に高い山は何でしょう？"
   },
-  "q4": {
+  "quiz-o": {
     "answers": [
-      { "content": "Answer 4-1 (最初に戻る)", "nextId": "init" },
-      { "content": "Answer 4-2 (最初に戻る)", "nextId": "init" },
-      { "content": "Answer 4-3 (最初に戻る)", "nextId": "init" },
-      { "content": "Answer 4-4 (最初に戻る)", "nextId": "init" }
+      {"content":"最初に戻る", "nextId": "init"}
     ],
-    "question": "質問４"
+    "question": "正解です！"
+  },
+  "quiz-x": {
+    "answers": [
+      {"content":"最初に戻る", "nextId": "init"}
+    ],
+    "question": "残念！不正解"
   }
 }

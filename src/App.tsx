@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import "./assets/styles/style.scss";
 import { AnswersList, Chats, FormDialog } from "./components/index";
-import defaultDataset from "./data/dataset";
+import defaultDataset from "./data/dataset.json";
 import { firestore } from "./firebase/index";
 
 // １つのチャット
@@ -34,7 +34,7 @@ const App: React.FC = () => {
   // 回答ボタン無効
   const [disabledAnswer, setDisabledAnswer] = useState<boolean>(false);
 
-  // firestoreから取得するか
+  // データをfirestoreから取得するか
   const fetchFireStore = false;
 
   // お問い合わせモーダルを開く
@@ -64,6 +64,17 @@ const App: React.FC = () => {
           a.target = "_blank";
           a.rel = "noopener noreferrer";
           a.click();
+          break;
+        // nextIdがweather-なら天気を取得して表示
+        case /^weather-*/.test(nextQuestionId):
+          (async () => {
+            setDisabledAnswer(true);
+            const message = await fetchWeather(nextQuestionId);
+            setTimeout(() => {
+              addChats({ text: message, type: "question" });
+              setDisabledAnswer(false);
+            }, 300);
+          })();
           break;
         // 一般的な回答
         default:
@@ -101,10 +112,36 @@ const App: React.FC = () => {
     }
     // ファイルから取得する
     else {
-      setDataset(defaultDataset);
+      setDataset(defaultDataset as {});
       displayNextQuestion(currentId, defaultDataset["init"]);
     }
   }, []);
+
+  // 天気を取得する
+  const fetchWeather = async (nextQuestionId: string) => {
+    try {
+      let areaName = "";
+      let areaCode = "";
+      if (nextQuestionId === "weather-tokyo") {
+        areaName = "東京";
+        areaCode = "130000";
+      } else if (nextQuestionId === "weather-osaka") {
+        areaName = "大阪";
+        areaCode = "270000";
+      } else if (nextQuestionId === "weather-fukuoka") {
+        areaName = "福岡";
+        areaCode = "400000";
+      }
+      const res = await fetch(`https://www.jma.go.jp/bosai/forecast/data/forecast/${areaCode}.json`);
+      const data = await res.json();
+      const ret = data["0"]["timeSeries"]["0"]["areas"]["0"]["weathers"]["0"];
+      const message = areaName + "の天気は" + ret + "です。";
+      console.log(data["0"]["timeSeries"]["0"]["areas"]["0"]);
+      return message;
+    } catch {
+      return "天気の取得に失敗しました。";
+    }
+  };
 
   // 毎回の処理
   useEffect(() => {
