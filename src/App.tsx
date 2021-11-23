@@ -134,7 +134,6 @@ const App: React.FC = () => {
 
   return (
     <section className="c-section">
-      <p style={{ textAlign: "center", marginTop: "2rem" }}>Test Deploy</p>
       <div className="c-box">
         <Chats chats={chats} />
         <AnswersList answers={answers} disabled={disabledAnswer} select={selectAnswer} />

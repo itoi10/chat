@@ -11,7 +11,7 @@ interface Props {
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     chats: {
-      height: 384,
+      height: "70%",
       padding: "0",
       // 高さを超えた時スクロールバー
       overflow: "auto",

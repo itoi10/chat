@@ -21,6 +21,8 @@ const useStyles = makeStyles((theme: Theme) =>
         backgroundColor: "#FFB549",
         color: "#FFF",
       },
+      height: "30%",
+      fontSize: "0.95em",
     },
   })
 );
