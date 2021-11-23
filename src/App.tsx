@@ -65,11 +65,14 @@ const App: React.FC = () => {
           a.rel = "noopener noreferrer";
           a.click();
           break;
-        // nextIdがweather-なら天気を取得して表示
-        case /^weather-*/.test(nextQuestionId):
+        // nextIdがweather:なら天気を取得して表示
+        case /^weather:*/.test(nextQuestionId):
+          addChats({ text: selectedAnswer, type: "answer" });
           (async () => {
             setDisabledAnswer(true);
-            const message = await fetchWeather(nextQuestionId);
+            // weather:地域名:地域コード
+            const [_, areaName, areaCode] = nextQuestionId.split(":");
+            const message = await fetchWeather(areaName, areaCode);
             setTimeout(() => {
               addChats({ text: message, type: "question" });
               setDisabledAnswer(false);
@@ -96,18 +99,26 @@ const App: React.FC = () => {
     if (fetchFireStore) {
       // 読み込みを待ってから次の処理に行く
       (async () => {
-        const initDataset: { [key: string]: Dataset } = {};
-        await firestore
-          .collection("questions")
-          .get()
-          .then((snapshots) => {
-            snapshots.forEach((doc) => {
-              initDataset[doc.id] = doc.data() as Dataset;
+        try {
+          const initDataset: { [key: string]: Dataset } = {};
+          await firestore
+            .collection("questions")
+            .get()
+            .then((snapshots) => {
+              snapshots.forEach((doc) => {
+                initDataset[doc.id] = doc.data() as Dataset;
+              });
             });
-          });
-        setDataset(initDataset);
-        // 最初の質問表示
-        displayNextQuestion(currentId, initDataset[currentId]);
+          setDataset(initDataset);
+          // 最初の質問表示
+          displayNextQuestion(currentId, initDataset[currentId]);
+          console.log("success firestore");
+        } catch (e) {
+          // firestoreから取得失敗したらファイルから取得する
+          console.log(e);
+          setDataset(defaultDataset as {});
+          displayNextQuestion(currentId, defaultDataset["init"]);
+        }
       })();
     }
     // ファイルから取得する
@@ -118,25 +129,12 @@ const App: React.FC = () => {
   }, []);
 
   // 天気を取得する
-  const fetchWeather = async (nextQuestionId: string) => {
+  const fetchWeather = async (areaName: string, areaCode: string) => {
     try {
-      let areaName = "";
-      let areaCode = "";
-      if (nextQuestionId === "weather-tokyo") {
-        areaName = "東京";
-        areaCode = "130000";
-      } else if (nextQuestionId === "weather-osaka") {
-        areaName = "大阪";
-        areaCode = "270000";
-      } else if (nextQuestionId === "weather-fukuoka") {
-        areaName = "福岡";
-        areaCode = "400000";
-      }
       const res = await fetch(`https://www.jma.go.jp/bosai/forecast/data/forecast/${areaCode}.json`);
       const data = await res.json();
       const ret = data["0"]["timeSeries"]["0"]["areas"]["0"]["weathers"]["0"];
       const message = areaName + "の天気は" + ret + "です。";
-      console.log(data["0"]["timeSeries"]["0"]["areas"]["0"]);
       return message;
     } catch {
       return "天気の取得に失敗しました。";

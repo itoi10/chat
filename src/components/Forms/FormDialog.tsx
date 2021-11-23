@@ -86,10 +86,8 @@ class FormDialog extends React.Component<Props, State> {
     // 送信
     const payload = {
       text:
-        `チャットボットからお問い合わせがありました\n` +
-        `・お名前\n${name}\n` +
-        `・Email\n ${email}\n` +
-        `・お問い合わせ内容\n${description}`,
+        // `チャットボットからお問い合わせがありました\n` +
+        `・お名前\n${name}\n` + `・Email\n ${email}\n` + `・お問い合わせ内容\n${description}`,
     };
 
     // Slack通知。デプロイ時は無効にしておく
@@ -112,7 +110,6 @@ class FormDialog extends React.Component<Props, State> {
       this.props.handleClose();
       this.setState({ name: "", email: "", description: "" });
     }
-    console.log(payload);
   };
 
   render(): React.ReactNode {

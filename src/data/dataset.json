@@ -1,50 +1,52 @@
 {
   "init": {
+    "question": "こんにちは！ご用件は何でしょうか？",
     "answers": [
       { "content": "天気を知りたい", "nextId": "tenki" },
       { "content": "クイズをしたい", "nextId": "quiz" },
       { "content": "お問い合わせ画面", "nextId": "contact" },
       { "content": "このアプリについて", "nextId": "aboutapp" }
-    ],
-    "question": "こんにちは！ご用件は何でしょうか？"
+    ]
   },
   "tenki": {
+    "question": "どこの天気が知りたいですか？",
     "answers": [
-      {"content":"東京", "nextId": "weather-tokyo"},
-      {"content":"大阪", "nextId": "weather-osaka"},
-      {"content":"福岡", "nextId": "weather-fukuoka"},
+      {"content":"東京", "nextId": "weather:東京:130000"},
+      {"content":"大阪", "nextId": "weather:大阪:270000"},
+      {"content":"福岡", "nextId": "weather:福岡:400000"},
       {"content":"最初に戻る", "nextId": "init"}
-    ],
-    "question": "どこの天気が知りたいですか？"
+    ]
   },
   "aboutapp": {
+    "question": "このアプリはReactの学習用にYouTubeで公開されている講座を参考に作ったチャットボットです。",
     "answers": [
       {"content":"🔗 解説している方の動画を見る", "nextId": "https://www.youtube.com/watch?v=MzJkWO73S70"},
       {"content":"🔗 このアプリのコードを開く", "nextId": "https://github.com/itoi10/chatbot"},
       {"content":"🔗 Reactについて", "nextId": "https://ja.reactjs.org/"},
       {"content":"最初に戻る", "nextId": "init"}
-    ],
-    "question": "このアプリはReactの学習用にYouTubeで公開されている講座を参考に作ったチャットボットです。"
+    ]
   },
   "quiz": {
+    "question": "日本で一番高い山は富士山ですが、２番目に高い山は何でしょう？",
     "answers": [
-      {"content":"槍が岳", "nextId": "quiz-x"},
+      {"content":"槍ヶ岳", "nextId": "quiz-x"},
       {"content":"谷川岳", "nextId": "quiz-x"},
       {"content":"北岳", "nextId": "quiz-o"},
       {"content":"立山", "nextId": "quiz-x"}
-    ],
-    "question": "日本で一番高い山は富士山ですが、２番目に高い山は何でしょう？"
+    ]
   },
   "quiz-o": {
+    "question": "正解です！",
     "answers": [
+      {"content":"もう１回", "nextId": "quiz"},
       {"content":"最初に戻る", "nextId": "init"}
-    ],
-    "question": "正解です！"
+    ]
   },
   "quiz-x": {
+    "question": "残念！不正解",
     "answers": [
+      {"content":"もう１回", "nextId": "quiz"},
       {"content":"最初に戻る", "nextId": "init"}
-    ],
-    "question": "残念！不正解"
+    ]
   }
 }
