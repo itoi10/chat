@@ -10,6 +10,16 @@ YouTube で公開されている講座を参考に React で作成したチャ�
 
 [Firebase](https://chatbot-a99d5.web.app/)
 
+
+<img src="./demo1.png" width="320" />　<img src="./demo2.png" width="320" />
+
+## 使用技術
+
+React, TypeScript, ESLint, Prettier, Material-UI
+
+Firebase, 天気API(気象庁サイトからJSON取得)
+
+
 ## セットアップ
 
 ```
